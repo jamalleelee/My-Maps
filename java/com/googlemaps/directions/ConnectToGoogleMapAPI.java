@@ -27,8 +27,22 @@ public class ConnectToGoogleMapAPI {
 
 			// creates the url parameters as a string encodeing them with the
 			// defined charset
-			String queryString = String.format("origin=%s&destination=%s&key=%s", URLEncoder.encode(origin, charset),
-					URLEncoder.encode(destination, charset), URLEncoder.encode(key, charset));
+
+			if (isTransit) {
+				String queryString = String.format("origin=%s&destination=%s&key=%s&mode=%s&transit_mode&language=%s",
+						URLEncoder.encode(origin, charset), URLEncoder.encode(destination, charset),
+						URLEncoder.encode(key, charset));
+
+			} else {
+				String queryString = String.format("origin=%s&destination=%s&key=%s&mode=%s&language=%s",
+						URLEncoder.encode(origin, charset), URLEncoder.encode(destination, charset),
+						URLEncoder.encode(key, charset));
+
+			}
+
+			String queryString = String.format("origin=%s&destination=%s&key=%s&mode=%s&transit_mode&language=%s",
+					URLEncoder.encode(origin, charset), URLEncoder.encode(destination, charset),
+					URLEncoder.encode(key, charset));
 
 			// creates a new URL out of the endpoint, returnType and queryString
 			URL googleDirections = new URL(endpoint + returnType + "?" + queryString);
